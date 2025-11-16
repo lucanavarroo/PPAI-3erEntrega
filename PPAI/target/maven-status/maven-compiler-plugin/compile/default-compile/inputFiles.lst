@@ -1,3 +1,4 @@
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\boundary\App.java
 C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\boundary\Interfaz.java
 C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\boundary\InterfazCierreInspeccion.java
 C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\boundary\InterfazNotificacionMail.java
@@ -17,3 +18,18 @@ C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\
 C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\interfaces\IObservadorCierreInspeccion.java
 C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\interfaces\ISujetoCierreInspeccion.java
 C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\mock\Datos.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\persistence\DataBaseManager.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioBase.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioCambioDeEstado.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioEmpleado.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioEstacionSismologica.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioEstado.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioMotivoFueraServicio.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioMotivoTipo.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioOrdenDeInspeccion.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioRol.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioSesion.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioSismografo.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\repositories\RepositorioUsuario.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\services\InitializadorDatos.java
+C:\Users\54299\Desktop\UTN\3\Diseño de Sistemas de Informacion\PPAI-MAVEN\PPAI\src\main\java\utn\dsi\ppai\services\ServicioPersistencia.java

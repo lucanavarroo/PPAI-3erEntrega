@@ -1,14 +1,33 @@
 package utn.dsi.ppai.boundary;
 
-import utn.dsi.ppai.control.GestorCierreInspeccion;
-import utn.dsi.ppai.mock.Datos;
-import utn.dsi.ppai.entity.*;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
+import utn.dsi.ppai.control.GestorCierreInspeccion;
 
 public class Interfaz extends JFrame implements InterfazCierreInspeccion {
     private JComboBox<String> comboOrdenes;
@@ -63,7 +82,8 @@ public class Interfaz extends JFrame implements InterfazCierreInspeccion {
 
 
     private void setupUserNamePanel() {
-        String userName = (Datos.usuario != null) ? Datos.usuario.getNombreUsuario() : "Usuario Desconocido";
+        // ✅ CORRECTO - Temporal hasta que cargue el gestor
+        String userName = "Cargando usuario...";
         lblUsuario = new JLabel("Usuario: " + userName);
         lblUsuario.setFont(new Font("Arial", Font.ITALIC, 12));
         lblUsuario.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Padding
@@ -189,27 +209,16 @@ public class Interfaz extends JFrame implements InterfazCierreInspeccion {
 
     private void setupGestor() {
         try {
-            Datos.inicializarDatos();
-
+            // ✅ CORRECTO - Solo crear el gestor, él se encarga del resto
             gestor = new GestorCierreInspeccion(
-                    Datos.listEmpleados.get(0),
-                    null,
-                    "",
-                    Datos.sesion,
-                    this,
-                    null,
-                    null,
-                    Datos.usuario
+                java.time.LocalDateTime.now(),
+                "",
+                this
             );
 
-            gestor.iniciarCierreOI(
-                    Datos.listaDeTodosLosEstados,
-                    Datos.listMotivosTipo,
-                    Datos.listEmpleados,
-                    Datos.sesion,
-                    Datos.listOrdenesDeInspeccion,
-                    Datos.listSismografos
-            );
+            // ✅ CORRECTO - El gestor maneja su inicialización
+            gestor.iniciarCierreOI();
+            
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this,
@@ -382,5 +391,12 @@ public class Interfaz extends JFrame implements InterfazCierreInspeccion {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Interfaz::new);
+    }
+
+    // ✅ AGREGAR - Para actualizar usuario después de inicialización
+    public void actualizarUsuarioEnPantalla(String nombreUsuario) {
+        SwingUtilities.invokeLater(() -> {
+            lblUsuario.setText("Usuario: " + nombreUsuario);
+        });
     }
 }

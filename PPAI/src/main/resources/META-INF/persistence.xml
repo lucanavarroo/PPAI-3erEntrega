@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+
+    <persistence-unit name="ppai-pu">
+        <!-- Especificar todas las entidades -->
+        <class>utn.dsi.ppai.entity.Rol</class>
+        <class>utn.dsi.ppai.entity.Estado</class>
+        <class>utn.dsi.ppai.entity.MotivoTipo</class>
+        <class>utn.dsi.ppai.entity.Empleado</class>
+        <class>utn.dsi.ppai.entity.Usuario</class>
+        <class>utn.dsi.ppai.entity.Sesion</class>
+        <class>utn.dsi.ppai.entity.EstacionSismologica</class>
+        <class>utn.dsi.ppai.entity.Sismografo</class>
+        <class>utn.dsi.ppai.entity.OrdenDeInspeccion</class>
+        <class>utn.dsi.ppai.entity.CambioDeEstado</class>
+        <class>utn.dsi.ppai.entity.MotivoFueraServicio</class>
+
+        <properties>
+            <!-- ✅ H2 Database en modo archivo -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:./database/ppai;AUTO_SERVER=TRUE"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            
+            <!-- ✅ Configuración de Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            
+            <!-- ✅ Configuración de H2 Console (opcional) -->
+            <property name="hibernate.connection.CharSet" value="utf8"/>
+            <property name="hibernate.connection.characterEncoding" value="utf8"/>
+            <property name="hibernate.connection.useUnicode" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

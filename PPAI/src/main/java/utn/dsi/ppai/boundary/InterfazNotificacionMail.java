@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.Data;
-import utn.dsi.ppai.entity.MotivoTipo;
 import utn.dsi.ppai.interfaces.IObservadorCierreInspeccion;
 
 @Data
@@ -13,14 +12,14 @@ public class InterfazNotificacionMail implements IObservadorCierreInspeccion {
     private int idSismografo;
     private String estadoFueraServicio;
     private LocalDateTime fechaHoraRegistro;
-    private List<MotivoTipo> motivos;
+    private List<String> motivos;
     private  List<String> comentarios;
 
     public InterfazNotificacionMail() {
     }
 
     @Override
-    public void actualizar(List<String> listEmails, int idSismografo, String estadoFueraServicio, LocalDateTime fechaHoraRegistro, List<MotivoTipo> motivos, List<String> comentarios){
+    public void actualizar(List<String> listEmails, int idSismografo, String estadoFueraServicio, LocalDateTime fechaHoraRegistro, List<String> motivos, List<String> comentarios){
         setMails(listEmails);
         setIdSismografo(idSismografo);
         setEstadoFueraServicio(estadoFueraServicio);

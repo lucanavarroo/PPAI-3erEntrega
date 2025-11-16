@@ -1,10 +1,28 @@
 package utn.dsi.ppai.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "estado")
 @Data
+@NoArgsConstructor
 public class Estado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_estado")
+    @EqualsAndHashCode.Include
+    private int idEstado;
+    @Column(name = "ambito")
     private String ambito;
+    @Column(name = "nombre_estado")
     private String nombreEstado;
 
     // Constantes para los estados

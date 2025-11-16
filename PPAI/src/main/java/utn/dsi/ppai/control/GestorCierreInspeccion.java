@@ -18,7 +18,9 @@ import utn.dsi.ppai.entity.Sismografo;
 import utn.dsi.ppai.entity.Usuario;
 import utn.dsi.ppai.interfaces.IObservadorCierreInspeccion;
 import utn.dsi.ppai.interfaces.ISujetoCierreInspeccion;
-
+import utn.dsi.ppai.persistence.DataBaseManager;
+import utn.dsi.ppai.services.InitializadorDatos;
+import utn.dsi.ppai.services.ServicioPersistencia;
 
 
 @Data
@@ -34,7 +36,6 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
     private List<String> listOrdenesInspeccion = new ArrayList<>();
     private Estado estadoCompletamenteRealizado;
     private OrdenDeInspeccion ordenInspeccionSeleccionada;
-    private String observacionOrdenCierre;
     private List<MotivoTipo> listSeleccionMotivo = new ArrayList<>();
     private List<String> listComentarioParaMotivo = new ArrayList<>();
     private Estado estadoCerrado;
@@ -49,27 +50,53 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
     private List<Empleado> listaDeEmpleados = new ArrayList<>();
     private List<Sismografo> listaDeSismografos = new ArrayList<>();
     private List<OrdenDeInspeccion> listaFiltradaYOrdenada = new ArrayList<>();
+    private ServicioPersistencia servicioPersistencia = new ServicioPersistencia();
 
     public GestorCierreInspeccion(
-            Empleado empleadoLogueado,
             LocalDateTime fechaHoraActual,
             String observacionCierre,
-            Sesion sesion,
-            InterfazCierreInspeccion pantallaCierreInspeccion,
-            InterfazNotificacionMail pantallaMail,
-            PantallaCCRS pantallaCCRS,
-            Usuario usuarioLogueado
+            InterfazCierreInspeccion pantallaCierreInspeccion
     ) {
-        this.empleadoLogueado = empleadoLogueado;
+        this.inicializarPersistencia();
+        this.servicioPersistencia = new ServicioPersistencia();
+        this.sesion = this.servicioPersistencia.obtenerSesionActiva();
+        this.usuarioLogueado = this.sesion.getUsuario();
+        this.empleadoLogueado = null;
         this.fechaHoraActual = fechaHoraActual;
         this.observacionCierre = observacionCierre;
-        this.sesion = sesion;
         this.pantallaCierreInspeccion = pantallaCierreInspeccion;
-        this.pantallaMail = pantallaMail;
-        this.pantallaCCRS = pantallaCCRS;
-        this.usuarioLogueado = usuarioLogueado;
+        this.listaTodosLosEstados = this.servicioPersistencia.todosLosEstados();
+        this.listaTodosLosMotivos = this.servicioPersistencia.todosLosMotivos();
+        this.listaDeEmpleados = this.servicioPersistencia.todosLosEmpleados();
+        this.listaDeTodasLasOrdenes = this.servicioPersistencia.todasLasOrdenes();
+        this.listaDeSismografos = this.servicioPersistencia.todosLosSismografos();
     }
 
+    private void inicializarPersistencia() {
+    try {
+        System.out.println("🔄 Inicializando sistema de persistencia...");
+        
+        // Inicializar base de datos
+        DataBaseManager.inicializarBaseDeDatos();
+        
+        // Poblar si es necesario
+        ServicioPersistencia servicioTemp = new ServicioPersistencia();
+        if (!servicioTemp.tieneEmpleados()) {
+            System.out.println("📊 Base de datos vacía, poblando con datos mock...");
+            InitializadorDatos inicializador = new InitializadorDatos();
+            inicializador.poblarBaseDeDatos();
+        } else {
+            System.out.println("✅ Base de datos ya contiene datos");
+        }
+        
+        System.out.println("✅ Sistema de persistencia inicializado correctamente");
+        
+    } catch (Exception e) {
+        System.err.println("❌ Error inicializando persistencia: " + e.getMessage());
+        throw new RuntimeException("No se pudo inicializar el sistema de persistencia", e);
+    }
+}
+     
 
     // Metodos unicos
     public void buscarRILogueado() {
@@ -81,12 +108,34 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
     public void buscarOIDeRI() {
         List<OrdenDeInspeccion> ordenesFiltradas = new ArrayList<>();
 
+        System.out.println("🔍 DEBUG - Total órdenes disponibles: " + this.listaDeTodasLasOrdenes.size());
+        System.out.println("🔍 DEBUG - Empleado logueado: " + (this.empleadoLogueado != null ? this.empleadoLogueado.getNombre() : "NULL"));
+        System.out.println("🔍 DEBUG - Constante ESTADO_COMPLETAMENTE_REALIZADO: '" + Estado.ESTADO_COMPLETAMENTE_REALIZADO + "'");
+
         for (OrdenDeInspeccion orden : this.listaDeTodasLasOrdenes) {
+            // DEBUG ADICIONAL - Ver el estado de cada orden
+            String estadoNombre = orden.getEstado() != null ? orden.getEstado().getNombreEstado() : "NULL";
+            String estadoAmbito = orden.getEstado() != null ? orden.getEstado().getAmbito() : "NULL";
+            
+            System.out.println("🔍 DEBUG - Orden " + orden.getNumeroOrden() + 
+                              " - Estado: '" + estadoNombre + "'" +
+                              " - Ámbito: '" + estadoAmbito + "'" +
+                              " - sosDeEmpleado: " + orden.sosDeEmpleado(this.empleadoLogueado) + 
+                              " - sosCompletamenteRealizado: " + orden.sosCompletamenteRealizado());
+            
+            // Comparación manual para debug
+            if (orden.getEstado() != null) {
+                boolean comparacionManual = Estado.ESTADO_COMPLETAMENTE_REALIZADO.equalsIgnoreCase(estadoNombre);
+                System.out.println("    🔬 Comparación manual: '" + Estado.ESTADO_COMPLETAMENTE_REALIZADO + "' vs '" + estadoNombre + "' = " + comparacionManual);
+            }
+            
             if (orden.sosDeEmpleado(this.empleadoLogueado) && orden.sosCompletamenteRealizado()) {
                 ordenesFiltradas.add(orden);
             }
         }
 
+        System.out.println("🔍 DEBUG - Órdenes después del filtro: " + ordenesFiltradas.size());
+        
         List<OrdenDeInspeccion> ordenadas = ordenarPorFechaDeFin(ordenesFiltradas);
 
         setListaFiltradaYOrdenada(ordenadas);
@@ -133,7 +182,7 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
     }
 
     public void tomarObservacionOrdenCierre(String observacion) {
-        this.observacionOrdenCierre = observacion;
+        this.observacionCierre = observacion;
         this.habilitarActualizarSismografo();
 
     }
@@ -187,7 +236,7 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
 
 
     public void validarDatosMinimosRequeridos() {
-        if (this.observacionOrdenCierre.isEmpty() ||
+        if (this.observacionCierre.isEmpty() ||
                 this.listSeleccionMotivo.isEmpty() ||
                 this.listComentarioParaMotivo.isEmpty()) {
             throw new IllegalStateException("Faltan datos para el cierre de la OI");
@@ -206,7 +255,7 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
             }
         }
         this.ordenInspeccionSeleccionada.setFechaHoraCierre(this.getFechaHoraActual());
-        this.ordenInspeccionSeleccionada.cerrar(this.estadoCerrado);
+        this.ordenInspeccionSeleccionada.cerrar(this.estadoCerrado, this.observacionCierre);
         this.actualizarSismografo();
     }
 
@@ -219,6 +268,9 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
         }
 
         this.ordenInspeccionSeleccionada.actualizarSismografo(this.listSeleccionMotivo, this.listComentarioParaMotivo, this.estadoFueraDeServicio, this.empleadoLogueado, this.getFechaHoraActual());
+        this.servicioPersistencia.actualizarOrden(this.ordenInspeccionSeleccionada);
+        this.servicioPersistencia.actualizarSismografo(this.ordenInspeccionSeleccionada.getEstacionSismologica().getSismografo());
+        this.servicioPersistencia.actualizarCambioDeEstado(this.ordenInspeccionSeleccionada.getEstacionSismologica().getSismografo().obtenerCambioDeEstadoAnterior());
         this.obtenerMailResponsableReparacion();
     }
 
@@ -234,6 +286,8 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
         auxObservadores.add(pantallaMail);
         auxObservadores.add(pantallaCCRS);
         this.suscribir(auxObservadores);
+        this.notificar();
+        this.finCU();
     }
     
     @Override
@@ -256,18 +310,18 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
 
     @Override
     public void notificar(){
+        List<String> listaMotivos = new ArrayList<>();
+
+        for (MotivoTipo motivo : this.listSeleccionMotivo){
+            listaMotivos.add(motivo.getDescripcion());
+        }
+
         for(IObservadorCierreInspeccion obs : this.observadores){
-            obs.actualizar(this.listMailsResponsables, this.ordenInspeccionSeleccionada.getEstacionSismologica().getSismografo().getIdentificadorSismografo(), this.estadoFueraDeServicio.getNombreEstado(), this.getFechaHoraActual(),this.listSeleccionMotivo, this.listComentarioParaMotivo);
+            obs.actualizar(this.listMailsResponsables, this.ordenInspeccionSeleccionada.getEstacionSismologica().getSismografo().getIdentificadorSismografo(), this.estadoFueraDeServicio.getNombreEstado(), this.getFechaHoraActual(), listaMotivos, this.listComentarioParaMotivo);
         }
 }
 
-    public void iniciarCierreOI(List<Estado> listaDeEstados, List<MotivoTipo> listaDeMotivos, List<Empleado> listaEmpleados, Sesion sesion, List<OrdenDeInspeccion> listaDeOrdenesInspeccion, List<Sismografo> listaDeSismografos) {
-        setListaTodosLosEstados(listaDeEstados);
-        setListaTodosLosMotivos(listaDeMotivos);
-        setListaDeEmpleados(listaEmpleados);
-        setListaDeTodasLasOrdenes(listaDeOrdenesInspeccion);
-        setSesion(sesion);
-        setListaDeSismografos(listaDeSismografos);
+    public void iniciarCierreOI() {
         this.buscarRILogueado();
 
 }

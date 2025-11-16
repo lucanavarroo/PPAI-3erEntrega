@@ -4,7 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import utn.dsi.ppai.entity.*;
+
+import utn.dsi.ppai.entity.CambioDeEstado;
+import utn.dsi.ppai.entity.Empleado;
+import utn.dsi.ppai.entity.EstacionSismologica;
+import utn.dsi.ppai.entity.Estado;
+import utn.dsi.ppai.entity.MotivoTipo;
+import utn.dsi.ppai.entity.OrdenDeInspeccion;
+import utn.dsi.ppai.entity.Rol;
+import utn.dsi.ppai.entity.Sesion;
+import utn.dsi.ppai.entity.Sismografo;
+import utn.dsi.ppai.entity.Usuario;
 
 public class Datos {
     public static List<Empleado> listEmpleados = new ArrayList<>();
@@ -28,23 +38,34 @@ public class Datos {
         listMotivosTipo.clear();
         listCambiosDeEstado.clear();
         listOrdenesDeInspeccion.clear();
-        usuario = null; // Reinicia el usuario logueado
+        listaDeTodosLosEstados.clear();
+        usuario = null;
 
         // 1. Crear Roles
         Rol rolAdmin = new Rol("Rol con privilegios completos", "Administrador");
+        rolAdmin.setIdRol(1); // ✅ ASEGURAR ID único
         Rol rolInspector = new Rol("Rol para realizar inspecciones", "Inspector");
+        rolInspector.setIdRol(2);
         Rol rolResponsableReparacion = new Rol("Rol para los responsables de reparacion", "Responsable Reparacion");
+        rolResponsableReparacion.setIdRol(3);
+        
         listRoles.add(rolAdmin);
         listRoles.add(rolInspector);
         listRoles.add(rolResponsableReparacion);
 
-        // 2. Crear Empleados
+        // 2. Crear Empleados con IDs únicos
         Empleado emp1 = new Empleado("Perez", "juan.perez@redsismica.com", "Juan", "123456789", rolInspector);
+        emp1.setIdEmpleado(1);
         Empleado emp2 = new Empleado("Gomez", "maria.gomez@redsismica.com", "Maria", "987654321", rolResponsableReparacion);
+        emp2.setIdEmpleado(2);
         Empleado emp3 = new Empleado("Lopez", "mario.lopez@redsismica.com", "Mario", "123456789", rolResponsableReparacion);
+        emp3.setIdEmpleado(3);
         Empleado emp4 = new Empleado("Navarro","lucanavarro@gmail.com","Luca","123213123",rolResponsableReparacion);
+        emp4.setIdEmpleado(4);
         Empleado emp5 = new Empleado("Gardella","tomasitogardella@hotmail.com","TOMI","12321321",rolResponsableReparacion);
+        emp5.setIdEmpleado(5);
         Empleado emp6 = new Empleado("Peralta","santiperalta@outlook.com","Santi","12321321",rolResponsableReparacion);
+        emp6.setIdEmpleado(6);
 
         listEmpleados.add(emp1);
         listEmpleados.add(emp2);
@@ -54,16 +75,31 @@ public class Datos {
         listEmpleados.add(emp6);
 
         // 3. Crear un Usuario asignado a un empleado
-        usuario = new Usuario("mlopez", "pass123", emp3);
+        usuario = new Usuario("mlopez", "pass123", emp6);
 
-        // 4. Crear Estados
+        // 4. ✅ CORRECCIÓN - Crear Estados con IDs únicos y ANTES de usarlos
         Estado estadoCompletamenteRealizado = new Estado(Estado.AMBITO_OI, Estado.ESTADO_COMPLETAMENTE_REALIZADO);
+        estadoCompletamenteRealizado.setIdEstado(1);
+        
         Estado estadoCerrado = new Estado(Estado.AMBITO_OI, Estado.ESTADO_CERRADA);
+        estadoCerrado.setIdEstado(2);
+        
         Estado estadoPendiente = new Estado(Estado.AMBITO_OI, "Pendiente");
+        estadoPendiente.setIdEstado(3);
+        
         Estado estadoFueraDeServicio = new Estado(Estado.AMBITO_SISMOGRAFO, Estado.ESTADO_FUERA_SERVICIO);
+        estadoFueraDeServicio.setIdEstado(4);
+        
         Estado estadoCompletamenteRechazado = new Estado(Estado.AMBITO_OI, Estado.ESTADO_COMPLETAMENTE_RECHAZADO);
+        estadoCompletamenteRechazado.setIdEstado(5);
+        
         Estado estadoActivo = new Estado(Estado.AMBITO_SISMOGRAFO, Estado.ESTADO_ACTIVO);
+        estadoActivo.setIdEstado(6);
+        
         Estado estadoOnline = new Estado(Estado.AMBITO_SISMOGRAFO, Estado.ESTADO_ONLINE);
+        estadoOnline.setIdEstado(7);
+        
+        // ✅ AGREGAR A LA LISTA DESPUÉS DE ASIGNAR IDs
         listaDeTodosLosEstados.add(estadoCompletamenteRealizado);
         listaDeTodosLosEstados.add(estadoCerrado);
         listaDeTodosLosEstados.add(estadoPendiente);
@@ -72,16 +108,19 @@ public class Datos {
         listaDeTodosLosEstados.add(estadoActivo);
         listaDeTodosLosEstados.add(estadoOnline);
 
-
-        // 5. Crear Motivos de Tipo
+        // 5. Crear Motivos de Tipo con IDs únicos
         MotivoTipo mt1 = new MotivoTipo("Mantenimiento");
+        mt1.setIdMotivoTipo(1);
         MotivoTipo mt2 = new MotivoTipo("Falla de Equipo");
+        mt2.setIdMotivoTipo(2);
         MotivoTipo mt3 = new MotivoTipo("Calibración");
+        mt3.setIdMotivoTipo(3);
+        
         listMotivosTipo.add(mt1);
         listMotivosTipo.add(mt2);
         listMotivosTipo.add(mt3);
 
-        //6. Crear Sesion
+        // 6. Crear Sesion
         sesion = new Sesion(null, LocalDateTime.now(), usuario);
 
         //7. Crear Cambios de Estado
@@ -126,28 +165,28 @@ public class Datos {
         sismo6.setEstacion(est6);
         sismo7.setEstacion(est7);
         
-        // 10. Crear Ordenes de Inspeccion
+        // 10. ✅ CORREGIR - Crear Ordenes de Inspeccion con estados correctos
         OrdenDeInspeccion orden1 = new OrdenDeInspeccion(
-                1, // nroOrden
-                LocalDateTime.of(2024,9,20,9,30,0), // fechaCreacion
-                null, // fechaFin
-                null, // fechaCierre
-                null, // observacioCierre
-                estadoPendiente, // estado
-                est1, // estacionSismologica,
-                emp1 // empleado
+                1,
+                LocalDateTime.of(2024,9,20,9,30,0),
+                null,
+                null,
+                null,
+                estadoPendiente, // ✅ Usar referencia directa del estado creado
+                est1,
+                emp1
         );
 
-        // Orden completamente Realizada
+        // ✅ USAR estadoCompletamenteRealizado (no estadoOnline)
         OrdenDeInspeccion ordenCRealizada1 = new OrdenDeInspeccion(
-                2, // nroOrden
-                LocalDateTime.of(2020,1,18,7,30,0), // fechaCreacion
-                LocalDateTime.of(2022,3,5,18,0,0), // fechaFin
-                null, // fechaCierre
-                null, // observacioCierre
-                estadoCompletamenteRealizado, // estado
-                est4, // estacionSismologica,
-                emp3 // empleado
+                2,
+                LocalDateTime.of(2020,1,18,7,30,0),
+                LocalDateTime.of(2022,3,5,18,0,0),
+                null,
+                null,
+                estadoCompletamenteRealizado, // ✅ Estado correcto
+                est4,
+                emp6
         );
 
         OrdenDeInspeccion ordenCRealizada2 = new OrdenDeInspeccion(
@@ -158,7 +197,7 @@ public class Datos {
                 null, // observacionCierre
                 estadoCompletamenteRealizado, // estado
                 est3, // estacionSismologica,
-                emp3 // empleado
+                emp6 // ✅ CAMBIAR emp3 por emp6 ("Santi")
         );
 
         OrdenDeInspeccion ordenCRealizada3 = new OrdenDeInspeccion(
@@ -169,7 +208,7 @@ public class Datos {
                 null, // observacionCierre
                 estadoCompletamenteRealizado, // estado
                 est2, // estacionSismologica,
-                emp3 // empleado
+                emp6 // ✅ CAMBIAR emp3 por emp6 ("Santi")
         );
 
         OrdenDeInspeccion ordenCRealizada4 = new OrdenDeInspeccion(
@@ -180,7 +219,7 @@ public class Datos {
                 null, // observacionCierre
                 estadoCompletamenteRealizado, // estado
                 est5, // estacionSismologica,
-                emp3 // empleado
+                emp6 // ✅ CAMBIAR emp3 por emp6 ("Santi")
         );
 
 
@@ -192,7 +231,7 @@ public class Datos {
                 null, // observacioCierre
                 estadoCompletamenteRealizado, // estado
                 est6, // estacionSismologica,
-                emp3 // empleado
+                emp6 // ✅ CAMBIAR emp3 por emp6 ("Santi")
         );
 
         // Orden cerrada
