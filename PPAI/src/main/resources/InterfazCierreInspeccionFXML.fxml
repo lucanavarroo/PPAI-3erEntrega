@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="750.0" prefWidth="900.0" stylesheets="@NatureStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="utn.dsi.ppai.boundary.InterfazCierreInspeccionController">
+    <!-- Top Bar with User Info -->
+    <top>
+        <VBox prefHeight="70.0" style="-fx-background-color: #2d5016; -fx-padding: 15;">
+            <children>
+                <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                    <children>
+                        <Label fx:id="lblUsuario" style="-fx-text-fill: white; -fx-font-size: 13;" text="Usuario: Cargando..." />
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+                <Label style="-fx-text-fill: #d4e8d4; -fx-font-size: 20; -fx-font-weight: bold;" text="Cierre de Orden de Inspección Sísmica">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Label>
+            </children>
+        </VBox>
+    </top>
+    <!-- Main Content Area -->
+    <center>
+        <VBox spacing="0" style="-fx-background-color: #f5f3f0; -fx-padding: 30;">
+            <children>
+                <!-- Welcome/Start Panel -->
+                <VBox fx:id="startPanel" alignment="CENTER" spacing="20.0" style="-fx-background-color: #f5f3f0;">
+                    <children>
+                        <Label style="-fx-font-size: 28; -fx-font-weight: bold; -fx-text-fill: #2d5016;" text="Bienvenido al Sistema de Inspección" />
+                        <Label style="-fx-font-size: 14; -fx-text-fill: #6b7280;" text="Inicie el proceso de cierre de orden de inspección" />
+                        <Button fx:id="btnIniciarCierre" onAction="#iniciarProceso" style="-fx-padding: 20; -fx-font-size: 16; -fx-font-weight: bold;" text="Iniciar Cierre de Orden de Inspección" />
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </VBox>
+                <!-- Main Form Panel -->
+                <ScrollPane fx:id="formPanel" fitToWidth="true" style="-fx-background-color: #f5f3f0; -fx-padding: 0;" visible="false">
+                    <content>
+                        <VBox spacing="20.0" style="-fx-padding: 0;">
+                            <!-- Step 1: Selection Panel -->
+                            <VBox fx:id="panelOrden" spacing="15.0" style="-fx-border-radius: 10; -fx-background-color: white; -fx-padding: 20; -fx-border-color: #a8d5a8; -fx-border-width: 2;">
+                                <children>
+                                    <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d5016;" text="Paso 1: Seleccione la Orden de Inspección" />
+                                    <Label style="-fx-font-size: 12; -fx-text-fill: #6b7280;" text="Seleccione la orden que desea cerrar de la lista disponible" />
+                                    <ComboBox fx:id="comboOrdenes" prefWidth="200.0" promptText="-- Seleccionar orden --" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <children>
+                                            <Button fx:id="btnConfirmarOI" onAction="#confirmarOrden" text="Continuar" />
+                                        </children>
+                                    </HBox>
+                                </children>
+                            </VBox>
+                            <!-- Step 2: Observation Panel -->
+                            <VBox fx:id="panelObs" spacing="15.0" style="-fx-border-radius: 10; -fx-background-color: white; -fx-padding: 20; -fx-border-color: #a8d5a8; -fx-border-width: 2;" visible="false">
+                                <children>
+                                    <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d5016;" text="Paso 2: Observación General" />
+                                    <Label style="-fx-font-size: 12; -fx-text-fill: #6b7280;" text="Ingrese sus observaciones sobre el estado de la inspección" />
+                                    <TextArea fx:id="txtObservacion" prefRowCount="5" style="-fx-font-size: 12; -fx-padding: 10; -fx-border-radius: 5;" wrapText="true" />
+                                    <Label style="-fx-font-size: 11; -fx-text-fill: #9ca3af;" text="Las observaciones no pueden estar vacías" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <children>
+                                            <Button fx:id="btnEnviarObs" onAction="#enviarObservacion" text="Continuar" />
+                                        </children>
+                                    </HBox>
+                                </children>
+                            </VBox>
+                            <!-- Step 3: Motivos Panel -->
+                            <VBox fx:id="panelMotivos" spacing="15.0" style="-fx-border-radius: 10; -fx-background-color: white; -fx-padding: 20; -fx-border-color: #a8d5a8; -fx-border-width: 2;" visible="false">
+                                <children>
+                                    <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d5016;" text="Paso 3: Seleccione los Motivos" />
+                                    <Label style="-fx-font-size: 12; -fx-text-fill: #6b7280;" text="Indique los motivos por los cuales se cierra esta orden de inspección" />
+                                    <ScrollPane fx:id="motivosScroll" fitToWidth="true" style="-fx-background-color: white; -fx-border-radius: 5;">
+                                        <content>
+                                            <VBox fx:id="motivosCheckBoxContainer" spacing="10.0" style="-fx-padding: 10;">
+                                            </VBox>
+                                        </content>
+                                    </ScrollPane>
+                                    <Label fx:id="motivosError" style="-fx-font-size: 11; -fx-text-fill: #dc2626;" text="" visible="false" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <children>
+                                            <Button fx:id="btnTomarMotivo" onAction="#procesarMotivos" text="Continuar" />
+                                        </children>
+                                    </HBox>
+                                </children>
+                            </VBox>
+                            <!-- Step 4: Confirmation Panel -->
+                            <VBox fx:id="panelConfirmacion" spacing="15.0" style="-fx-border-radius: 10; -fx-background-color: white; -fx-padding: 20; -fx-border-color: #a8d5a8; -fx-border-width: 2;" visible="false">
+                                <children>
+                                    <Label style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #2d5016;" text="Paso 4: Confirmación del Cierre" />
+                                    <Label style="-fx-font-size: 12; -fx-text-fill: #6b7280;" text="Revise los datos y confirme el cierre de la orden" />
+                                    <VBox fx:id="resumenPanel" spacing="10.0" style="-fx-background-color: #f9fafb; -fx-padding: 15; -fx-border-radius: 5;" />
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <children>
+                                            <Button fx:id="btnCancelarCierre" onAction="#cancelarProceso" style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-padding: 10 30; -fx-font-size: 12;" text="Cancelar" />
+                                            <Button fx:id="btnConfirmarCierre" onAction="#confirmarCierre" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-padding: 10 30; -fx-font-size: 12;" text="Confirmar Cierre" />
+                                        </children>
+                                    </HBox>
+                                </children>
+                            </VBox>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

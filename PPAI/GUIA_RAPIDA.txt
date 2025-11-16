@@ -1,0 +1,275 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                   GUÍA RÁPIDA DE USO - INTERFAZ NUEVA                     ║
+║                    Cierre de Orden de Inspección Sísmica                   ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+════════════════════════════════════════════════════════════════════════════════
+1️⃣ PANTALLA DE BIENVENIDA
+════════════════════════════════════════════════════════════════════════════════
+
+Al iniciar la aplicación verá:
+
+┌─────────────────────────────────────────┐
+│ Bienvenido al Sistema de Inspección     │
+│ Inicie el proceso de cierre...          │
+│                                         │
+│  [Iniciar Cierre de Orden ...]         │
+└─────────────────────────────────────────┘
+
+ACCIÓN: Haga clic en el botón verde para comenzar.
+
+════════════════════════════════════════════════════════════════════════════════
+2️⃣ PASO 1: SELECCIONAR ORDEN DE INSPECCIÓN
+════════════════════════════════════════════════════════════════════════════════
+
+Se mostrará un dropdown con todas las órdenes disponibles:
+
+┌─────────────────────────────────────────────────────────┐
+│ Paso 1: Seleccione la Orden de Inspección              │
+│ Seleccione la orden que desea cerrar...                │
+│                                                         │
+│ ┌─────────────────────────────┐                        │
+│ │ -- Seleccionar orden --    ▼│  [Continuar]          │
+│ └─────────────────────────────┘ (deshabilitado)       │
+└─────────────────────────────────────────────────────────┘
+
+PASOS:
+  1. Haga clic en el dropdown
+  2. Seleccione una orden de la lista
+  3. El botón "Continuar" se habilitará (cambiará de gris a verde)
+  4. Haga clic en "Continuar"
+  5. Se mostrará el Paso 2
+
+⚠️ VALIDACIÓN: Debe seleccionar una orden. No puede dejar en blanco.
+
+════════════════════════════════════════════════════════════════════════════════
+3️⃣ PASO 2: INGRESE OBSERVACIÓN GENERAL
+════════════════════════════════════════════════════════════════════════════════
+
+Deberá escribir observaciones sobre el estado de la inspección:
+
+┌─────────────────────────────────────────────────────────┐
+│ Paso 2: Observación General                            │
+│ Ingrese sus observaciones sobre el estado...            │
+│                                                         │
+│ ┌─────────────────────────────────────────────────────┐ │
+│ │ Mantenimiento realizado correctamente en todas...  │ │
+│ │ las áreas. Sismógrafo funcionando normalmente.    │ │
+│ │                                                    │ │
+│ │                                  [Continuar]     │ │
+│ └─────────────────────────────────────────────────────┘ │
+│                                                         │
+│ Las observaciones no pueden estar vacías              │
+└─────────────────────────────────────────────────────────┘
+
+PASOS:
+  1. Haga clic en el área de texto
+  2. Escriba sus observaciones (mínimo 1 carácter)
+  3. El botón "Continuar" se habilitará automáticamente
+  4. Haga clic en "Continuar"
+  5. Se mostrará el Paso 3
+
+⚠️ VALIDACIÓN: No puede dejar vacío. Si intenta continuar sin escribir,
+              verá un mensaje de error en rojo.
+
+💡 CONSEJO: Escriba descripciones detalladas del estado de la inspección.
+
+════════════════════════════════════════════════════════════════════════════════
+4️⃣ PASO 3: SELECCIONE LOS MOTIVOS
+════════════════════════════════════════════════════════════════════════════════
+
+Deberá seleccionar al menos un motivo por el cual se cierra la orden:
+
+┌─────────────────────────────────────────────────────────┐
+│ Paso 3: Seleccione los Motivos                         │
+│ Indique los motivos por los cuales se cierra...        │
+│                                                         │
+│ ☑ Mantenimiento preventivo                            │
+│ ☐ Reparación de componente                            │
+│ ☑ Calibración                                          │
+│ ☐ Fuera de servicio temporal                           │
+│ ☐ Inspección completada                               │
+│                                                         │
+│                              [Continuar]              │
+└─────────────────────────────────────────────────────────┘
+
+PASOS:
+  1. Revise la lista de motivos disponibles
+  2. Haga clic en el checkbox junto a cada motivo relevante
+  3. El checkmark (✓) aparecerá cuando lo seleccione
+  4. Seleccione al menos UN motivo
+  5. Haga clic en "Continuar"
+  6. Se mostrará el Paso 4
+
+⚠️ VALIDACIÓN: Debe seleccionar mínimo 1 motivo. Si intenta continuar sin
+              seleccionar ninguno, verá un mensaje de error en rojo.
+
+💡 CONSEJO: Puede seleccionar múltiples motivos si aplican varios.
+
+════════════════════════════════════════════════════════════════════════════════
+5️⃣ PASO 4: CONFIRMACIÓN DEL CIERRE
+════════════════════════════════════════════════════════════════════════════════
+
+Verá un resumen de todo lo que ha ingresado:
+
+┌─────────────────────────────────────────────────────────┐
+│ Paso 4: Confirmación del Cierre                        │
+│ Revise los datos y confirme el cierre...               │
+│                                                         │
+│ Orden Seleccionada:          OI-2024-001              │
+│ Observación:                 Mantenimiento realizado   │
+│ Motivos Seleccionados:       Calibración, Mantenim... │
+│                                                         │
+│  [Cancelar]              [Confirmar Cierre]           │
+└─────────────────────────────────────────────────────────┘
+
+OPCIONES:
+
+A) CANCELAR (Botón Rojo):
+   • Cancela el proceso completamente
+   • Todos los datos se pierden
+   • Vuelve a la pantalla de bienvenida
+   • ¡ATENCIÓN! No se puede deshacer
+
+B) CONFIRMAR CIERRE (Botón Verde):
+   • Confirma el cierre de la orden
+   • Se envían notificaciones a empleados
+   • Se actualizan monitores CCRS
+   • Se muestra un mensaje de éxito
+
+════════════════════════════════════════════════════════════════════════════════
+✨ DESPUÉS DE CONFIRMAR
+════════════════════════════════════════════════════════════════════════════════
+
+Cuando haga clic en "Confirmar Cierre" verá:
+
+┌─────────────────────────────────────────┐
+│             ✓ ÉXITO                     │
+│                                         │
+│ Orden de Inspección cerrada             │
+│ exitosamente.                           │
+│                                         │
+│ ✓ Mails enviados a los empleados        │
+│ ✓ Información publicada en CCRS         │
+│ ✓ Sismógrafo marcado como               │
+│   "Fuera de Servicio"                   │
+│                                         │
+│           [Aceptar]                     │
+└─────────────────────────────────────────┘
+
+DESPUÉS: La interfaz se reinicia automáticamente y vuelve a la pantalla
+         de bienvenida para procesar otra orden.
+
+════════════════════════════════════════════════════════════════════════════════
+🎯 FLUJO COMPLETO EN 5 MINUTOS
+════════════════════════════════════════════════════════════════════════════════
+
+Tiempo estimado: 3-5 minutos por orden
+
+┌─────────────────────────────────────────────────────┐
+│ Pantalla de Bienvenida          (1-2 segundos)     │
+├─────────────────────────────────────────────────────┤
+│ ↓ Click: "Iniciar Cierre"                          │
+├─────────────────────────────────────────────────────┤
+│ Paso 1: Seleccionar Orden       (30-60 segundos)   │
+│ • Abrir dropdown                                    │
+│ • Seleccionar orden                                │
+│ • Click Continuar                                  │
+├─────────────────────────────────────────────────────┤
+│ Paso 2: Observación             (1-2 minutos)      │
+│ • Escribir observación detallada                   │
+│ • Click Continuar                                  │
+├─────────────────────────────────────────────────────┤
+│ Paso 3: Motivos                 (30-60 segundos)   │
+│ • Seleccionar motivos relevantes                   │
+│ • Click Continuar                                  │
+├─────────────────────────────────────────────────────┤
+│ Paso 4: Confirmación            (30 segundos)      │
+│ • Revisar datos                                    │
+│ • Click Confirmar Cierre                           │
+├─────────────────────────────────────────────────────┤
+│ Mensaje de Éxito                (10 segundos)      │
+│ • Se muestran acciones completadas                │
+│ • Click Aceptar                                    │
+└─────────────────────────────────────────────────────┘
+
+════════════════════════════════════════════════════════════════════════════════
+🔴 MENSAJES DE ERROR COMUNES
+════════════════════════════════════════════════════════════════════════════════
+
+ERROR 1: "Debe seleccionar una orden de inspección"
+  CAUSA: No seleccionó nada del dropdown
+  SOLUCIÓN: Haga clic en el dropdown y seleccione una orden
+
+ERROR 2: "Debe ingresar una observación"
+  CAUSA: El campo de observación está vacío
+  SOLUCIÓN: Escriba al menos un carácter en el área de texto
+
+ERROR 3: "Debe seleccionar al menos un motivo"
+  CAUSA: No marcó ningún checkbox de motivos
+  SOLUCIÓN: Seleccione al menos UN motivo relevante
+
+════════════════════════════════════════════════════════════════════════════════
+💡 CONSEJOS ÚTILES
+════════════════════════════════════════════════════════════════════════════════
+
+1. OBSERVACIONES DETALLADAS:
+   Escriba observaciones específicas sobre:
+   • Estado del sismógrafo
+   • Trabajo realizado
+   • Problemas encontrados o resueltos
+   • Próximas acciones recomendadas
+
+2. MOTIVOS MÚLTIPLES:
+   Si hay varios motivos, puede seleccionar más de uno
+   Ejemplo: Calibración + Mantenimiento preventivo
+
+3. REVISIÓN ANTES DE CONFIRMAR:
+   Siempre revise el resumen en el Paso 4
+   Asegúrese de que todos los datos sean correctos
+
+4. NO HAY DESHACER:
+   Una vez confirmado, el proceso no se puede revertir
+   Si se equivoca, deberá crear una nueva orden
+
+5. USUARIO EN PANTALLA:
+   En la esquina superior derecha ve "Usuario: [nombre]"
+   Esto confirma quién está realizando la acción
+
+════════════════════════════════════════════════════════════════════════════════
+❓ PREGUNTAS FRECUENTES
+════════════════════════════════════════════════════════════════════════════════
+
+P: ¿Qué pasa si cierro la ventana sin confirmar?
+R: Todos los datos se pierden. Deberá iniciar nuevamente.
+
+P: ¿Puedo modificar la orden después de seleccionarla?
+R: Sí, puede hacer clic en el botón Cancelar en cualquier momento
+   para volver a la selección de orden.
+
+P: ¿Cuántos motivos puedo seleccionar?
+R: Tantos como sea necesario. Mínimo 1, máximo todos los disponibles.
+
+P: ¿Los comentarios son obligatorios para cada motivo?
+R: Depende de la configuración del sistema. Siga las instrucciones
+   que aparezcan.
+
+P: ¿Cuánto tiempo se guarda la sesión?
+R: La sesión se guarda hasta que confirme o cierre la aplicación.
+
+P: ¿Puedo procesar múltiples órdenes seguidas?
+R: Sí, después de confirmar una orden, la interfaz se reinicia
+   y puede procesar otra inmediatamente.
+
+════════════════════════════════════════════════════════════════════════════════
+📞 SOPORTE
+════════════════════════════════════════════════════════════════════════════════
+
+Si experimenta problemas:
+
+1. Verifique que tiene internet (para cargar órdenes)
+2. Recargue la aplicación (Close y reabra)
+3. Contacte al administrador del sistema
+4. Proporcione el mensaje de error exacto
+
+════════════════════════════════════════════════════════════════════════════════

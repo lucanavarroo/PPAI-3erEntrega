@@ -23,6 +23,7 @@ utn\dsi\ppai\repositories\RepositorioUsuario.class
 utn\dsi\ppai\boundary\Interfaz.class
 utn\dsi\ppai\entity\Sismografo.class
 utn\dsi\ppai\repositories\RepositorioCambioDeEstado.class
+utn\dsi\ppai\boundary\InterfazCierreInspeccionController.class
 utn\dsi\ppai\services\ServicioPersistencia.class
 utn\dsi\ppai\boundary\App.class
 utn\dsi\ppai\control\GestorCierreInspeccion.class
