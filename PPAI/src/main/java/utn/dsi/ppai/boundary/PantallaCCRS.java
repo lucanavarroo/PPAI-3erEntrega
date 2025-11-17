@@ -19,14 +19,26 @@ public class PantallaCCRS implements IObservadorCierreInspeccion {
     public PantallaCCRS() {
     }
     public void publicar(){
-        System.out.println("Se actualizo la pantalla con los siguientes datos:");
-        System.out.println("ID Sismografo: " + idSismografo);
-        System.out.println("Estado: " + estadoFueraServicio);
-        System.out.println("Fecha y Hora de Registro: " + fechaHoraRegistro);
-        System.out.println("Motivos y Comentarios: ");
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("                        PANTALLA CCRS                          ");
+        System.out.println("                 Centro de Control y Monitoreo                ");
+        System.out.println("---------------------------------------------------------------");
+        System.out.println();
+        System.out.println("  ID Sismografo:              " + idSismografo);
+        System.out.println("  Estado:                    " + estadoFueraServicio);
+        System.out.println("  Fecha y Hora de Registro:  " + fechaHoraRegistro);
+        System.out.println();
+        System.out.println("  ------------------------------------------------------");
+        System.out.println("  MOTIVOS Y COMENTARIOS");
+        System.out.println("  ------------------------------------------------------");
         for (int i = 0; i < motivos.size(); i++) {
-            System.out.println("Motivo: " + motivos.get(i) + " - Comentario: " + comentarios.get(i));
+            System.out.println("  " + (i + 1) + ". Motivo: " + motivos.get(i));
+            if (i < comentarios.size() && comentarios.get(i) != null && !comentarios.get(i).isEmpty()) {
+                System.out.println("     Comentario: " + comentarios.get(i));
+            }
         }
+        System.out.println();
+        System.out.println("---------------------------------------------------------------");
     }
 
     @Override

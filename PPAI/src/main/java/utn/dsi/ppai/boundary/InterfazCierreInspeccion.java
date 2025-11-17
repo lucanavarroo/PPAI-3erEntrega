@@ -1,7 +1,8 @@
 package utn.dsi.ppai.boundary;
 
-import utn.dsi.ppai.control.GestorCierreInspeccion;  // Añade este import
-import java.util.List;
+import java.util.List;  // Añade este import
+
+import utn.dsi.ppai.control.GestorCierreInspeccion;
 
 public interface InterfazCierreInspeccion {
     void setGestor(GestorCierreInspeccion gestor);
@@ -14,7 +15,6 @@ public interface InterfazCierreInspeccion {
     void tomarSeleccionMotivo(List<String> motivos);
     void tomarComentario(String comentarioMotivo);
     void solicitarConfirmacionCierre();
-    void confirmarCierreOI();
     void mostrarError(String mensaje);
     void habilitarPantalla();
 }

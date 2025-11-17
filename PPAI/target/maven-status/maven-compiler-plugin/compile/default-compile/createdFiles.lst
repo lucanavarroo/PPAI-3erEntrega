@@ -20,7 +20,6 @@ utn\dsi\ppai\entity\Estado.class
 utn\dsi\ppai\boundary\InterfazCierreInspeccion.class
 utn\dsi\ppai\entity\MotivoTipo.class
 utn\dsi\ppai\repositories\RepositorioUsuario.class
-utn\dsi\ppai\boundary\Interfaz.class
 utn\dsi\ppai\entity\Sismografo.class
 utn\dsi\ppai\repositories\RepositorioCambioDeEstado.class
 utn\dsi\ppai\boundary\InterfazCierreInspeccionController.class

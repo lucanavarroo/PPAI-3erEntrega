@@ -42,6 +42,7 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
     private Estado estadoFueraDeServicio;
     private List<MotivoTipo> listMotivoTipo = new ArrayList<>();
     private List<IObservadorCierreInspeccion> observadores = new ArrayList<>();
+    private String notif;
     //atributos auxiliares ya que debemos inyectar los datos desde el mock
     private List<String> listMailsResponsables = new ArrayList<>();
     private List<OrdenDeInspeccion> listaDeTodasLasOrdenes = new ArrayList<>();
@@ -226,7 +227,8 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
     }
 
 
-    public void tomarConfirmacionOI(boolean confirmacion) {
+    public void tomarConfirmacionOI(boolean confirmacion, String notif) {
+        setNotif(notif);
         if (confirmacion) {
             this.validarDatosMinimosRequeridos();
         } else {
@@ -280,11 +282,24 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
                 this.listMailsResponsables.add(empleado.getMail());
             }
         }
-        this.pantallaMail = new InterfazNotificacionMail();
-        this.pantallaCCRS = new PantallaCCRS();
-        List<IObservadorCierreInspeccion> auxObservadores = new ArrayList<>();
-        auxObservadores.add(pantallaMail);
-        auxObservadores.add(pantallaCCRS);
+
+         List<IObservadorCierreInspeccion> auxObservadores = new ArrayList<>();
+        if(this.notif.equals("A")){
+            // Ambos: Mail y CCRS
+            this.pantallaMail = new InterfazNotificacionMail();
+            this.pantallaCCRS = new PantallaCCRS();
+            auxObservadores.add(pantallaMail);
+            auxObservadores.add(pantallaCCRS);
+        } else if(this.notif.equals("M")){
+            // Solo Mail
+            this.pantallaMail = new InterfazNotificacionMail();
+            auxObservadores.add(pantallaMail);
+        } else if(this.notif.equals("C")){
+            // Solo CCRS
+            this.pantallaCCRS = new PantallaCCRS();
+            auxObservadores.add(pantallaCCRS);
+        }
+
         this.suscribir(auxObservadores);
         this.notificar();
         this.finCU();
