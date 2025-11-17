@@ -35,6 +35,10 @@ public abstract class RepositorioBase<T, ID> {
     }
     
     public T update(T entity) {
+        if (entity == null) {
+            throw new IllegalArgumentException("Entidad null recibida en update()");
+        }
+
         EntityManager em = DataBaseManager.getEntityManager();
         try {
             em.getTransaction().begin();

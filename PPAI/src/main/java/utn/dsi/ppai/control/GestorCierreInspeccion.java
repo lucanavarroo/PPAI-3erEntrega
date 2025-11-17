@@ -9,6 +9,7 @@ import lombok.Data;
 import utn.dsi.ppai.boundary.InterfazCierreInspeccion;
 import utn.dsi.ppai.boundary.InterfazNotificacionMail;
 import utn.dsi.ppai.boundary.PantallaCCRS;
+import utn.dsi.ppai.entity.CambioDeEstado;
 import utn.dsi.ppai.entity.Empleado;
 import utn.dsi.ppai.entity.Estado;
 import utn.dsi.ppai.entity.MotivoTipo;
@@ -271,8 +272,16 @@ public class GestorCierreInspeccion implements ISujetoCierreInspeccion {
 
         this.ordenInspeccionSeleccionada.actualizarSismografo(this.listSeleccionMotivo, this.listComentarioParaMotivo, this.estadoFueraDeServicio, this.empleadoLogueado, this.getFechaHoraActual());
         this.servicioPersistencia.actualizarOrden(this.ordenInspeccionSeleccionada);
-        this.servicioPersistencia.actualizarSismografo(this.ordenInspeccionSeleccionada.getEstacionSismologica().getSismografo());
-        this.servicioPersistencia.actualizarCambioDeEstado(this.ordenInspeccionSeleccionada.getEstacionSismologica().getSismografo().obtenerCambioDeEstadoAnterior());
+        
+        Sismografo sismografo = this.ordenInspeccionSeleccionada.getEstacionSismologica().getSismografo();
+        this.servicioPersistencia.actualizarSismografo(sismografo);
+        
+        // ✅ VALIDAR SI EXISTE CAMBIO DE ESTADO ANTERIOR
+        CambioDeEstado cambioAnterior = sismografo.obtenerCambioDeEstadoAnterior();
+        if (cambioAnterior != null) {
+            this.servicioPersistencia.actualizarCambioDeEstado(cambioAnterior);
+        }
+        
         this.obtenerMailResponsableReparacion();
     }
 
